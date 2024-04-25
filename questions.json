@@ -1,0 +1,12 @@
+[
+    {
+        "id":"",
+        "waste":"emballage",
+        "answer":"No",
+        "image":{
+            "src":"emballage.svg",
+            "alt":"Emballage de barre chocolatée"
+        },
+        "explanation":"Délai de dégradation : X ans"
+    },
+]
