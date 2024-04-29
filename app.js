@@ -13,3 +13,99 @@ event listener
 afficher/masquer element html
 window.location
 */
+const questions = [
+    {
+        "id":"1",
+        "waste":"emballage",
+        "answer":"no",
+        "image":{
+            "src":"emballage.svg",
+            "alt":"Emballage de barre chocolatée"
+        },
+        "explanation":"Délai de dégradation : X ans"
+    },
+    {
+        "id":"2",
+        "waste":"trognon",
+        "answer":"no",
+        "image":{
+            "src":"trognon.svg",
+            "alt":"Trognon de pomme"
+        },
+        "explanation":"Délai de dégradation : X ans"
+    },
+]
+
+document.addEventListener("DOMContentLoaded", () => {
+getButton(".js-play-button")
+})
+
+function getButton(selector) {
+    const button = document.querySelector(selector)
+    console.log(button)
+    button.addEventListener("click", startGame)
+}
+
+function startGame() {
+    const questionSection = document.querySelector(".js-questions")
+    questionSection.classList.remove('hidden');
+    
+    const startPage = document.querySelector(".js-startpage")
+    startPage.classList.add("hidden")
+
+    play()
+}
+
+function play() {
+    const questionId = 1
+    initQuestion(questionId)
+    const inputs = document.querySelectorAll('.js-form input[type="radio"]')
+    inputs.forEach((input) => {
+        input.addEventListener("click", (event)=> {
+            showAnswer(event, questionId)
+        })
+    })
+
+}
+
+function showAnswer(event, questionId) {
+    const userAnswer = event.target.value
+    const index = questionId - 1
+    const correctAnswer = questions[index].answer
+    const result = document.querySelector(".js-result")
+    const explanation = document.querySelector(".js-explanation")
+
+    if (userAnswer === correctAnswer) {
+        result.textContent = "Bonne réponse !"
+    }
+    else {
+        result.textContent = "Mauvaise réponse !"
+    }
+
+    explanation.textContent = questions[index].explanation
+    const answerSection = document.querySelector(".js-answer")
+    answerSection.classList.remove('hidden');
+    nextQuestion(questionId + 1)
+}
+
+    
+
+function nextQuestion(questionId) {
+    const button = document.querySelector(".js-next-question")
+    console.log(button)
+    button.addEventListener("click", ()=> {
+        initQuestion(questionId) 
+    })
+    
+}
+
+function initQuestion(questionId) {
+    const index = questionId - 1
+    const image = document.querySelector(".js-image")
+    image.src = "images/"+ questions[index].image.src
+    console.log(questions[index].image.src)
+
+    const answerSection = document.querySelector(".js-answer")
+    answerSection.classList.add('hidden');
+    
+}

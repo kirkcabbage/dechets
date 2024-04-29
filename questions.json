@@ -2,7 +2,7 @@
     {
         "id":"",
         "waste":"emballage",
-        "answer":"No",
+        "answer":"no",
         "image":{
             "src":"emballage.svg",
             "alt":"Emballage de barre chocolatée"
