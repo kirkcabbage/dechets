@@ -57,12 +57,13 @@ function startGame() {
 }
 
 function play() {
-    const questionId = 1
+    let questionId = 1
     initQuestion(questionId)
     const inputs = document.querySelectorAll('.js-form input[type="radio"]')
     inputs.forEach((input) => {
         input.addEventListener("click", (event)=> {
             showAnswer(event, questionId)
+            questionId = questionId + 1
         })
     })
 
@@ -86,15 +87,12 @@ function showAnswer(event, currentQuestionId) {
     const answerSection = document.querySelector(".js-answer")
     answerSection.classList.remove('hidden');
     if (currentQuestionId === 2) {
-        /*endGame(document.querySelector(".js-questions"))*/
-        console.log("hey")
+        endGame(document.querySelector(".js-questions"))
     } else {
         nextQuestion(currentQuestionId)
     }
 }
 
-
-    
 function nextQuestion(currentQuestionId) {
     const button = document.querySelector(".js-next-question")
     console.log(currentQuestionId)
