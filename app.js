@@ -42,7 +42,7 @@ getButton(".js-play-button")
 
 function getButton(selector) {
     const button = document.querySelector(selector)
-    console.log(button)
+    /*console.log(button)*/
     button.addEventListener("click", startGame)
 }
 
@@ -68,9 +68,9 @@ function play() {
 
 }
 
-function showAnswer(event, questionId) {
+function showAnswer(event, currentQuestionId) {
     const userAnswer = event.target.value
-    const index = questionId - 1
+    const index = currentQuestionId - 1
     const correctAnswer = questions[index].answer
     const result = document.querySelector(".js-result")
     const explanation = document.querySelector(".js-explanation")
@@ -85,27 +85,37 @@ function showAnswer(event, questionId) {
     explanation.textContent = questions[index].explanation
     const answerSection = document.querySelector(".js-answer")
     answerSection.classList.remove('hidden');
-    nextQuestion(questionId + 1)
+    if (currentQuestionId === 2) {
+        /*endGame(document.querySelector(".js-questions"))*/
+        console.log("hey")
+    } else {
+        nextQuestion(currentQuestionId)
+    }
 }
 
-    
 
-function nextQuestion(questionId) {
-    const button = document.querySelector(".js-next-question")
-    console.log(button)
-    button.addEventListener("click", ()=> {
-        initQuestion(questionId) 
-    })
     
+function nextQuestion(currentQuestionId) {
+    const button = document.querySelector(".js-next-question")
+    console.log(currentQuestionId)
+    button.addEventListener("click", ()=> {
+        initQuestion(currentQuestionId +1) 
+    })
 }
 
 function initQuestion(questionId) {
     const index = questionId - 1
     const image = document.querySelector(".js-image")
     image.src = "images/"+ questions[index].image.src
-    console.log(questions[index].image.src)
+    /*console.log(questions[index].image.src)*/
 
     const answerSection = document.querySelector(".js-answer")
     answerSection.classList.add('hidden');
-    
+}
+
+function endGame(questionSection) {
+    console.log("endgame")
+    const endPage = document.querySelector(".js-end-game")
+    endPage.classList.remove('hidden');
+    questionSection.classList.add('hidden')
 }
